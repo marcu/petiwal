@@ -1,0 +1,6 @@
+database.db
+.ipynb_checkpoints/
+__pycache__/
+venv
+.env
+imgs/
