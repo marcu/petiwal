@@ -19,7 +19,7 @@ Idéalement nous aimerions la crétaion :
 - de panels citoyens (tirés au sort de manière représentative de la population) qui participeront à la prise de décision,
 - d'un système de votation comme en Suisse.
 
-Actuellements, de ces outils n'existent pas. Nous avons l'impression que ces idées mettront du temps à être mises en place et qu'il faudra défendre notre demande. Ces pétitions, nous semblent, un bon moyen pour faire avancer le schmilblick. En effet, si nous rassemblons une communauté, assez grande, de citoyens votant pour toutes les pétitions pour lesquelles le citoyen n'est pas en désaccord. Dabs ce cas, il serat courant qu'une pétition (une fois le minimum de 1000 signatures atteint) soit présentée au parlement wallon.
+Actuellement ces outils n'existent pas. Nous avons l'impression que ces idées mettront du temps à être mises en place et qu'il faudra défendre notre demande. Ces pétitions, nous semblent, un bon moyen pour faire avancer le schmilblick. En effet, si nous rassemblons une communauté, assez grande, de citoyens votant pour toutes les pétitions pour lesquelles le citoyen n'est pas en désaccord. Dabs ce cas, il serat courant qu'une pétition (une fois le minimum de 1000 signatures atteint) soit présentée au parlement wallon.
 
 Bref si nous sommes solidaire, nous pouvons permettre à n'importe quel citoyen
 de présenter une pétition au parlement wallon. 
