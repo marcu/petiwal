@@ -27,15 +27,6 @@ Bref si nous sommes solidaire, nous pouvons permettre à n'importe quel citoyen
 de présenter une pétition au parlement wallon. 
 
 
-## Prochaines étapes
-
-Nous envisageons d'alimenter un compte Instagram de la même manière que nous le
-faison pour Mastodon.
-
-Par la suite nous envisageons de créer une mailing list où les citoyens wallons
-pourront s'inscrire pour recevoir les nouvelles pétitions wallonnes par email.
-
-
 # Comment utiliser ce script ?
 
 
@@ -59,3 +50,12 @@ python3 main.py --help # to get help
 ## Configuration du plugin 
 
 Créer un fichier `config.py` à partir du fichier `config.py.example` et le compléter.
+
+
+# Prochaines étapes
+
+Nous envisageons d'alimenter un compte Instagram de la même manière que nous le
+faison pour Mastodon.
+
+Par la suite nous envisageons de créer une mailing list où les citoyens wallons
+pourront s'inscrire pour recevoir les nouvelles pétitions wallonnes par email.
