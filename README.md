@@ -2,7 +2,7 @@
 
 Ce dépot contient un script afin de mettre en avant les pétitions wallonnes.
 
-Il alimente le compte Mastodon : https://mastodon.social/@PetitionsWallonnes à partir des pétiions du site du Parlement wallon (https://www.parlement-wallonie.be/pwpages?p=petition).
+Il alimente le compte Mastodon : https://mastodon.social/@petitions_wallonie à partir des pétiions du site du Parlement wallon (https://www.parlement-wallonie.be/pwpages?p=petition).
 
 
 ## Wallonie et participation citoyenne
