@@ -1,10 +1,8 @@
 # Promotion des pétitions wallonnes
 
-Compte mastodon : https://mastodon.social/@PetitionsWallonnes
-
 Ce dépot contient un script afin de mettre en avant les pétitions wallonnes.
 
-Pour l'instant le script permet de générer des posts pour Mastodon (https://mastodon.social/). Chaque post présente une pétition wallonne.
+Il alimente le compte Mastodon : https://mastodon.social/@PetitionsWallonnes à partir des pétiions du site du Parlement wallon (https://www.parlement-wallonie.be/pwpages?p=petition).
 
 
 ## Wallonie et participation citoyenne
@@ -54,8 +52,8 @@ Créer un fichier `config.py` à partir du fichier `config.py.example` et le com
 
 # Prochaines étapes
 
-Nous envisageons d'alimenter un compte Instagram de la même manière que nous le
-faison pour Mastodon.
+- Instagram : nous envisageons d'alimenter un compte Instagram de la même manière que nous le faisons pour Mastodon.
 
-Par la suite nous envisageons de créer une mailing list où les citoyens wallons
-pourront s'inscrire pour recevoir les nouvelles pétitions wallonnes par email.
+- Mailing list : par la suite nous envisageons de créer une mailing list où les citoyens wallons pourront s'inscrire pour recevoir les nouvelles pétitions wallonnes par email.
+
+- Ajout des pétitions de la chambre (https://dekamer.mijnopinie.belgium.be/)
