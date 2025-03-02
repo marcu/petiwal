@@ -26,8 +26,12 @@ def post_on_mapston(petition: Petition) -> None:
     # be sure to have all info for that petition
     petition.generate_missing_data()
 
-    # Text to post
-    status_text = f"{petition.description_abstract} {petition.get_link()}"
+    if len(petition.description_abstract) > 500:
+        status_text = f"{petition.description_abstract_500} {petition.get_link()}"
+        print("Using the 500 characters abstract.")
+    else:
+        # Text to post
+        status_text = f"{petition.description_abstract} {petition.get_link()}"
 
     # Path to the image file
     image_path = f"./imgs/{petition.id}.png"

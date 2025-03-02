@@ -7,12 +7,26 @@ from datetime import datetime
 from db import get_session
 from entities import Petition, VoteHistory
 from mastodon_tasks import post_on_mapston
+from instagram_tasks import post_on_instagram
 from scraping import get_petition_info, get_petition_list
 
 import db
 
 ACTION_UPDATE_PETITIONS = "update_petitions"
 ACTION_POST_ON_MASTODON = "post_on_mastodon"
+ACTION_POST_ON_INSTAGRAM = "post_on_instagram"
+ACTION_GET_NEXT_PETITION_ID = "get_next_petition_id"
+
+
+def get_next_petition_id():
+    """Get the next petition id to process"""
+    session = get_session()
+    petition = session.query(Petition).filter(
+        Petition.posted_on_mastodon == False).first()
+    if petition:
+        return petition.id
+    else:
+        return None
 
 
 def update_petitions():
@@ -76,23 +90,46 @@ if __name__ == "__main__":
     parser.add_argument(
         "action",
         help="The action to perform",
-        choices=[ACTION_UPDATE_PETITIONS, ACTION_POST_ON_MASTODON],
+        choices=[ACTION_UPDATE_PETITIONS, ACTION_POST_ON_MASTODON, ACTION_POST_ON_INSTAGRAM, ACTION_GET_NEXT_PETITION_ID],
     )
 
     parser.add_argument("--petition_id", help="The petition id", type=int)
 
     args = parser.parse_args()
 
-    if args.petition_id is None and args.action == ACTION_POST_ON_MASTODON:
-        parser.error("Pour l'option choisie, l'argument petition_id est \
-obligatoire.")
+    if args.action == ACTION_GET_NEXT_PETITION_ID:
+        print("Next petition id to process:", Petition.get_next_petition_to_publish(session=db.get_session()))
 
     if args.action == ACTION_UPDATE_PETITIONS:
         update_petitions()
 
     elif args.action == ACTION_POST_ON_MASTODON:
+        session = db.get_session()
         petition_id = args.petition_id
-        print("Posting on Mastodon for petition #", petition_id)
+
+        if petition_id:
+            petition = session.query(Petition).filter(Petition.id == petition_id).first()
+        else:
+            petition = Petition.get_next_petition_to_publish(session=session, mastodon=True)
+
+        print("Posting on Mastodon for petition #", petition.id)
+
+        print(petition.description_abstract)
+
+        print(len(petition.description_abstract))
+
+        if petition:
+            petition.generate_missing_data()
+            session.commit()
+            post_on_mapston(petition)
+            session.commit()
+        else:
+            print(f"Petition #{petition_id} not found in the database")
+
+    elif args.action == ACTION_POST_ON_INSTAGRAM:
+        # todo same as mastodon
+        petition_id = args.petition_id
+        print("Posting on Instagram for petition #", petition_id)
 
         session = db.get_session()
         petition = session.query(Petition).filter(Petition.id == petition_id).first()
@@ -102,9 +139,11 @@ obligatoire.")
         if petition:
             petition.generate_missing_data()
             session.commit()
-            post_on_mapston(petition)
+            post_on_instagram(petition)
+            session.commit()
         else:
             print(f"Petition #{petition_id} not found in the database")
+
 
     else:
         print("Action not implemented yet")

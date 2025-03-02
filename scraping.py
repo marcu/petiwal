@@ -8,7 +8,7 @@ def get_petition_list() -> list:
     """ Get the list of the petitions from the wallonie parlement website """
     url = "https://www.parlement-wallonie.be/pwpages?p=petition-list&d=all"
 
-    response = requests.get(url)
+    response = requests.get(url, verify=False)
 
     soup = BeautifulSoup(response.content, 'html.parser')
     petitions = []
@@ -40,7 +40,7 @@ def get_petition_info(petition_id: int) -> dict:
 
     petition_dict = {'id': petition_id}
 
-    response = requests.get(url)
+    response = requests.get(url, verify=False)
     soup = BeautifulSoup(response.content, 'html.parser')
 
     # get title

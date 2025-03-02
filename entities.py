@@ -51,6 +51,7 @@ class Petition(Base):
     author = Column(String, nullable=False)
     description = Column(String, nullable=False)
     description_abstract = Column(String, nullable=True, default=None)
+    description_abstract_500 = Column(String, nullable=True, default=None)
 
     email = Column(String, nullable=True, default=None)
 
@@ -154,11 +155,32 @@ the following JSON :
 
         return response_fr
 
+    def generate_petition_abstract_with_char_limit(self, max_char: int) -> str:
+        """
+        Generate the abstract of a petition with a character limit
+
+        Args:
+            max_char: The maximum number of characters for the abstract
+        """
+
+        prompt_fr = f"Ecrire moins de {max_char} caratères le résumé de la \
+    pétition dont le titre est {self.title} et le contenu est {self.description}"
+        response_fr = mistral_call(prompt_fr)
+
+        return response_fr
+
     def generate_missing_data(self) -> None:
         """Generate missing data for the petition"""
         # Generate the abstract
         if not self.description_abstract:
             self.description_abstract = self.generate_petition_abstract()
+
+        self.description_abstract_500 = self.description_abstract
+
+        max_caracters = 500
+        while len(self.description_abstract_500) > 500:
+            self.description_abstract_500 = self.generate_petition_abstract_with_char_limit(max_caracters)
+            max_caracters -= 50
 
         # Generate the keywords
         # if not self.keywords or not self.keywords_en:
@@ -170,3 +192,16 @@ the following JSON :
         if not os.path.exists(f"imgs/{self.id}.png"):
             # Generate the image
             self.generate_petition_image()
+
+    @classmethod
+    def get_next_petition_to_publish(cls, session, mastodon: bool = True):
+        """Returns the new petition to publish for mastodon or instagram"""
+        if mastodon:
+            media_pub_date = cls.mastodon_pub_date
+        else:
+            media_pub_date = cls.instagram_pub_date
+
+        return session.query(cls).filter(
+            media_pub_date == None,
+            cls.closed == False,
+        ).order_by(cls.open_date).first()

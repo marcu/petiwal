@@ -1,5 +1,4 @@
-python-dotenv
-mistralai
-
-
-pip install Mastodon.py
+python-dotenv==1.0.1
+mistralai==1.1.0
+Mastodon.py==1.8.1
+instagrapi==2.1.2
